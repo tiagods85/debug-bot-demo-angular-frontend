@@ -1,0 +1,36 @@
+<main>
+  <h1>Debug Bot Demo -- Items</h1>
+
+  <section>
+    <h2>Add item</h2>
+    <form (ngSubmit)="onCreate()">
+      <label>
+        Name
+        <input type="text" [(ngModel)]="newName" name="name" />
+      </label>
+      <label>
+        Description
+        <input type="text" [(ngModel)]="newDescription" name="description" />
+      </label>
+      <button type="submit" [disabled]="isAddDisabled">Add</button>
+    </form>
+    @if (createError) {
+      <p class="error">{{ createError }}</p>
+    }
+  </section>
+
+  <section>
+    <h2>Items (total: {{ total }})</h2>
+    @if (loading) {
+      <p>Loading...</p>
+    } @else {
+      <ul>
+        @for (item of items; track item.id) {
+          <li>
+            <strong>{{ item.name }}</strong> -- {{ item.description }}
+          </li>
+        }
+      </ul>
+    }
+  </section>
+</main>
