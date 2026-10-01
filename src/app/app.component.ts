@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ItemsService } from './services/items.service';
 import { ItemViewModel } from './models/item';
 
+declare const Sentry: { init(options: { dsn: string; environment: string }): void } | undefined;
+
 @Component({
   selector: 'app-root',
   imports: [FormsModule],
@@ -20,7 +22,15 @@ export class AppComponent implements OnInit {
   createError: string | null = null;
 
   ngOnInit(): void {
+    const dsn = (window as unknown as { __SENTRY_DSN__?: string }).__SENTRY_DSN__;
+    if (dsn && typeof Sentry !== 'undefined') {
+      Sentry.init({ dsn, environment: 'demo' });
+    }
     this.loadItems();
+  }
+
+  simulateFrontendError(): void {
+    throw new Error('deliberate frontend error for the Sentry PoC');
   }
 
   loadItems(): void {

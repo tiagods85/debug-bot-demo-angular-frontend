@@ -6,6 +6,10 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Sentry Browser SDK (Task 9's own PoC) -- loaded only for this
+       demo's own frontend-exception scenario; no DSN means no-op,
+       same opt-in posture as the Python backend's own SENTRY_DSN check. -->
+  <script src="https://browser.sentry-cdn.com/8.9.2/bundle.tracing.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <app-root></app-root>
