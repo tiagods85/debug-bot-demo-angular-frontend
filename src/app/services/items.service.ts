@@ -21,6 +21,6 @@ export class ItemsService {
 }
 
 function toViewModel(item: ApiItem): ItemViewModel {
-  const { id, name, description = 'No description provided', createdAt } = item;
-  return { id, name, description, createdAt };
+  const { id, name, description, createdAt } = item;
+  return { id, name, description: description ?? 'No description provided', createdAt };
 }
